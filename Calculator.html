@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+	<style type="text/css">
+	    #name
+	    {
+	    	height:0.1%;
+	    	width:96%;
+	    	font-size: 1.2em;
+	    	margin-top: 1%;
+	    	text-align: center;
+            font-family: Footlight MT Light;
+            color:#d3d3d3;
+	    	text-shadow:3px 3px 3px black;
+	    }
+	     #footer
+	    {
+	    	height:0.05%;
+	    	width:96%;
+	    	float:left;
+	    	font-size: 1em;
+	    	margin-top: 8%;
+	    	margin-left: 3%;
+	    	
+            font-family: Footlight MT Light;
+            color:#d3d3d3;
+	    	text-shadow:3px 3px 3px black;
+	    }
+		#current
+		{
+			width: 96%;
+			margin: 0 auto;
+			margin-top: 8%;
+		
+			height: 14%;
+            
+		}
+        #textbox
+        {
+            width: 100%;
+            font-size: 2em;
+            text-align: right;
+            font-family:Comic Sans MS;
+            text-shadow: 3px 3px 3px black; 
+            background :-webkit-linear-gradient(left ,#151515,#000000);
+            color :white;
+            outline: 0;
+            height: 100%;
+            border: 1px #939393 solid;
+            border-radius: 5px;
+        }
+        #result
+        {
+        	width:96%;
+        	background :-webkit-linear-gradient(left ,#151515,#000000);
+        	text-shadow: 2px 2px 2px black;
+        
+            color: white;
+        	font-size: 2em;
+        
+			text-align: right;
+			font-family:Comic Sans MS; 
+        	margin: 0 auto;
+        	margin-top: 1.5%;
+            border: 1px #939393 solid;
+            border-radius: 5px;
+        	height: 8%; 
+        }
+        #numpad
+        {
+        	width: 68%;
+            margin-left: 4%;
+        	margin-top: 1%;
+        	float: left;
+        
+        	height: 62%; 
+        }
+        #calc
+        {
+        	width: 25%;
+            margin-left: 2%;
+        	margin-top: 1%;
+        	float: left;
+          
+        	height: 71%; 
+        }
+        .num
+        {
+        	width: 30%;
+        
+
+        	height: 14.5%;
+        	margin-top: 6%;
+        	margin-left: 3%;
+        	
+        	float: left;
+        }
+        .numB
+        {
+            width: 100%;
+            background: -webkit-linear-gradient(left ,#212121,#000000);
+            text-shadow: 2px 2px 2px black;
+            text-align: center;
+            box-shadow: 3px 3px 6px #000000;
+            vertical-align: text-bottom;
+            height: 100%;
+            font-size: 2em;
+            outline:0;
+            border:2px dimgrey solid;
+           border-radius: 8px;
+            cursor: pointer;       
+            color: white;        
+            font-family: Comic Sans MS;
+        
+      }
+        .numB:hover
+        {
+        	background: -webkit-linear-gradient(left ,#ffc04c,orange);
+        		border:2px #d3d3d3 solid;
+            -webkit-transition : background 0.7s , border 0.7s;
+        }
+
+        .op
+        {
+            width: 80%;
+            height: 12.5%;
+        	margin-top: 17%;
+            float: left;	
+        }
+        .opB
+        {
+            width: 100%;
+            background: -webkit-linear-gradient(left ,#212121,#000000);
+            text-align: center;
+            box-shadow: 3px 3px 6px #000000;
+            height: 100%;
+            color: white;
+            border:2px dimgrey solid;
+            text-shadow: 2px 2px 2px black;
+             outline:0;
+            cursor: pointer;
+            font-size: 2em;
+            font-family: Comic Sans MS;
+            border-radius: 8px;
+            
+        }
+        .opB:hover
+        {
+        	background: -webkit-linear-gradient(left ,#40E0D0,#008B8B);
+       
+        	border:2px #d3d3d3 solid;
+            -webkit-transition : background 0.7s , border 0.7s;	
+        }
+        #equal
+        {
+           width: 80%;
+        	height: 12.5%;
+        	margin-top: 17%;
+        	float: left;
+        	
+        }
+        #equal input
+        {
+           width: 100%;
+           outline:0;
+            text-align: center;
+            box-shadow: 3px 3px 6px #000000;
+            border:2px dimgrey solid;
+            height: 100%;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-size: 1.5em;
+            background: -webkit-linear-gradient(left ,#ff3232,red); 
+            font-family: Comic Sans MS;
+            
+        }
+        #equal input:hover
+        {
+     
+        	background: -webkit-linear-gradient(left ,#ff3232,red);
+        	border:2px #d3d3d3 solid;
+        	-webkit-transition:background 0.7s , border 0.7s;
+        }
+       
+	</style>
+    <script type="text/javascript">
+    	var string = '0';
+    	 function init(s)
+         {
+           if(string != '0')
+            {
+                document.getElementById('textbox').value = string;
+                string = '0';
+            }
+            print(s);
+         }
+         function print(c)
+        {
+            document.getElementById('textbox').value += c;
+        }
+        function execute(s)
+        {
+            document.getElementById('result').innerHTML = eval(s);
+            string = eval(s);
+        }
+        function del()
+        {
+            string = document.getElementById('textbox').value;
+            string = string.slice(0,-1);
+            document.getElementById('textbox').value = string;
+        }
+        function clr()
+        {
+            string = '0';
+            document.getElementById('textbox').value = "";
+            document.getElementById('result').innerHTML = "";
+        }
+    
+    </script>
+</head>
+<body>
+<div style = "background :-webkit-linear-gradient(left ,#3f3f3f,#000000); height: 550px; width: 30%; margin: 0 auto; border: 2px #bdbdbd solid; border-radius: 10px; box-shadow:4px 4px 10px black;  ">
+	<div id = "name">Web Calculator</div>
+	<div id = "current"><input type="text" id="textbox"> </div>
+
+	<div id = "result"></div>
+	<div id = "numpad">
+		<div class = "num" ><input class="numB" type="button" value="C" onclick="clr()"></div>
+		<div class = "num" ><input class="numB" type="button" value="(" onclick="init(value)"></div>
+		<div class = "num" ><input class="numB" type="button" value=")" onclick="init(value)"></div>
+		<div class = "num" ><input class="numB" type="button" value="7" onclick="init(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="8" onclick="init(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="9" onclick="init(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="4" onclick="init(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="5" onclick="init(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="6" onclick="init(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="1" onclick="init(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="2" onclick="init(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="3" onclick="init(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="." onclick="init(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="0" onclick="init(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="&larr;" onclick="del()"></div>
+	    <div id = "footer"><i>By Pardeep Singh</i></div>
+	</div>
+	<div id = "calc">
+		<div class = "op" ><input class="opB" type="button" value="&divide;" onclick="init('/')"></div>
+		<div class = "op" ><input class="opB" type="button" value="&times;" onclick="init('*')"></div>
+		<div class = "op" ><input class="opB" type="button" value="-" onclick="init(value)"></div>
+		<div class = "op" ><input class="opB" type="button" value="+" onclick="init(value)"></div>
+	<div id = "equal" ><input type="submit" value="=" onclick="execute(document.getElementById('textbox').value)"></div>
+	</div>
+	
+</div>
+
+
+</body>
+</html>
