@@ -120,7 +120,32 @@
         		border:2px #d3d3d3 solid;
             -webkit-transition : background 0.7s , border 0.7s;
         }
+        .par
+         {
 
+            width: 48%;
+            margin-left: 2%;
+            background: -webkit-linear-gradient(left ,#212121,#000000);
+            text-shadow: 2px 2px 2px black;
+            text-align: center;
+            box-shadow: 3px 3px 6px #000000;
+            vertical-align: text-bottom;
+            height: 100%;
+            float:left;
+            font-size: 2em;
+            outline:0;
+            border:2px dimgrey solid;
+            border-radius: 8px;
+            cursor: pointer;       
+            color: white;        
+            font-family: Comic Sans MS;
+         }
+         .par:hover
+        {
+        	background: -webkit-linear-gradient(left ,#ffc04c,orange);
+        		border:2px #d3d3d3 solid;
+            -webkit-transition : background 0.7s , border 0.7s;
+        }
         .op
         {
             width: 80%;
@@ -187,69 +212,141 @@
 	</style>
     <script type="text/javascript">
     	var string = '0';
-    	 function init(s)
-         {
-           if(string != '0')
-            {
-                document.getElementById('textbox').value = string;
-                string = '0';
-            }
-            print(s);
-         }
+    	var temp = '0';
+         var flag = false;
          function print(c)
         {
+        	if(flag)
+            {
+              	clr();
+              	flag = false;
+            }
             document.getElementById('textbox').value += c;
+        }
+        function ans()
+        {
+        	if(flag)
+            {
+              	clr();
+              	flag = false;
+            }
+         document.getElementById('textbox').value += string;  
         }
         function execute(s)
         {
-            document.getElementById('result').innerHTML = eval(s);
-            string = eval(s);
+        
+        	
+        	if(check(s.toString()) == false)
+        	{
+        		
+        		window.alert("Syntax Error");
+        		clr();
+        	}
+        	else if(isValid(s.toString()) == false)
+        	{
+        		window.alert("Syntax Error");
+        		clr();
+        	}
+        	else if(eval(s) == "Infinity")
+        	{
+        		window.alert("Error : Denominator is 0");
+        		clr();
+        	}
+
+        	else
+        	{
+        		string = eval(s);
+        		if(string.toString().length > 18)
+        		{
+        				alert("Maximum limit Exceeded");
+        				string = '0';
+        		}
+                else
+                {
+                	document.getElementById('result').innerHTML = eval(s);
+                  string = eval(s);
+                }
+               flag = true;
+            }
+        }
+        function check(s)
+        {
+        
+            var depth=0;
+            
+            for(var i=0; i < s.length; i++)
+            {
+            
+                if(s[i]=='(')
+                   {depth++;}
+                else if(s[i]==')')
+                    {depth--;}
+                
+                if(depth<0)
+                    {return false;}
+            }
+            if(depth>0)
+                {return false;}
+            return true;
         }
         function del()
         {
-            string = document.getElementById('textbox').value;
-            string = string.slice(0,-1);
-            document.getElementById('textbox').value = string;
+            temp = document.getElementById('textbox').value;
+            temp = temp.slice(0,-1);
+            document.getElementById('textbox').value = temp;
         }
         function clr()
         {
-            string = '0';
             document.getElementById('textbox').value = "";
             document.getElementById('result').innerHTML = "";
         }
-    
+         function isValid(s)
+         {
+         	var isVal = true;
+             try {
+                 new RegExp(s);
+             }
+             catch(e) {
+                  isVal = false;
+             }
+            return isVal;
+         }
     </script>
 </head>
 <body>
 <div style = "background :-webkit-linear-gradient(left ,#3f3f3f,#000000); height: 550px; width: 30%; margin: 0 auto; border: 2px #bdbdbd solid; border-radius: 10px; box-shadow:4px 4px 10px black;  ">
 	<div id = "name">Web Calculator</div>
-	<div id = "current"><input type="text" id="textbox"> </div>
+	<div id = "current"><input type="text" id="textbox" onkeydown = "if (event.keyCode == 13)
+                        document.getElementById('eq').click()"> </div>
 
 	<div id = "result"></div>
 	<div id = "numpad">
 		<div class = "num" ><input class="numB" type="button" value="C" onclick="clr()"></div>
-		<div class = "num" ><input class="numB" type="button" value="(" onclick="init(value)"></div>
-		<div class = "num" ><input class="numB" type="button" value=")" onclick="init(value)"></div>
-		<div class = "num" ><input class="numB" type="button" value="7" onclick="init(value)"></div>
-	    <div class = "num" ><input class="numB" type="button" value="8" onclick="init(value)"></div>
-	    <div class = "num" ><input class="numB" type="button" value="9" onclick="init(value)"></div>
-	    <div class = "num" ><input class="numB" type="button" value="4" onclick="init(value)"></div>
-	    <div class = "num" ><input class="numB" type="button" value="5" onclick="init(value)"></div>
-	    <div class = "num" ><input class="numB" type="button" value="6" onclick="init(value)"></div>
-	    <div class = "num" ><input class="numB" type="button" value="1" onclick="init(value)"></div>
-	    <div class = "num" ><input class="numB" type="button" value="2" onclick="init(value)"></div>
-	    <div class = "num" ><input class="numB" type="button" value="3" onclick="init(value)"></div>
-	    <div class = "num" ><input class="numB" type="button" value="." onclick="init(value)"></div>
-	    <div class = "num" ><input class="numB" type="button" value="0" onclick="init(value)"></div>
+		<div class = "num" ><input class="numB" type="button" value="Ans" onclick="ans()"></div>
+		<div class = "num" >
+			   <input class="par" type="button" value="(" onclick="print(value)">
+               <input class="par" type="button" value=")" onclick="print(value)">
+		</div>
+		<div class = "num" ><input class="numB" type="button" value="7" onclick="print(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="8" onclick="print(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="9" onclick="print(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="4" onclick="print(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="5" onclick="print(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="6" onclick="print(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="1" onclick="print(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="2" onclick="print(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="3" onclick="print(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="." onclick="print(value)"></div>
+	    <div class = "num" ><input class="numB" type="button" value="0" onclick="print(value)"></div>
 	    <div class = "num" ><input class="numB" type="button" value="&larr;" onclick="del()"></div>
 	    <div id = "footer"><i>By Pardeep Singh</i></div>
 	</div>
 	<div id = "calc">
-		<div class = "op" ><input class="opB" type="button" value="&divide;" onclick="init('/')"></div>
-		<div class = "op" ><input class="opB" type="button" value="&times;" onclick="init('*')"></div>
-		<div class = "op" ><input class="opB" type="button" value="-" onclick="init(value)"></div>
-		<div class = "op" ><input class="opB" type="button" value="+" onclick="init(value)"></div>
-	<div id = "equal" ><input type="submit" value="=" onclick="execute(document.getElementById('textbox').value)"></div>
+		<div class = "op" ><input class="opB" type="button" value="&divide;" onclick="print('/')"></div>
+		<div class = "op" ><input class="opB" type="button" value="&times;" onclick="print('*')"></div>
+		<div class = "op" ><input class="opB" type="button" value="-" onclick="print(value)"></div>
+		<div class = "op" ><input class="opB" type="button" value="+" onclick="print(value)"></div>
+	<div id = "equal" ><input id = "eq" type="button" value="=" onclick="execute(document.getElementById('textbox').value)"></div>
 	</div>
 	
 </div>
