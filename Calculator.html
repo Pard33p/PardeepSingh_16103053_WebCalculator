@@ -242,11 +242,11 @@
         		window.alert("Syntax Error");
         		clr();
         	}
-        	else if(isValid(s.toString()) == false)
+        	/*else if(isValid(s.toString()) == false)
         	{
         		window.alert("Syntax Error");
         		clr();
-        	}
+        	}*/
         	else if(eval(s) == "Infinity")
         	{
         		window.alert("Error : Denominator is 0");
@@ -300,7 +300,7 @@
             document.getElementById('textbox').value = "";
             document.getElementById('result').innerHTML = "";
         }
-         function isValid(s)
+         /*function isValid(s)
          {
          	var isVal = true;
              try {
@@ -310,7 +310,7 @@
                   isVal = false;
              }
             return isVal;
-         }
+         }*/
     </script>
 </head>
 <body>
